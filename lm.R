@@ -11,3 +11,5 @@ plot(b ~ a, data = adat)
 ## Korreláció
 cov(x,y)
 cor(x,y)
+
+lm(b ~ a, data = adat)
