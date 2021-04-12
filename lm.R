@@ -12,4 +12,5 @@ plot(b ~ a, data = adat)
 cov(x,y)
 cor(x,y)
 
-lm(b ~ a, data = adat)
+adat.lm = lm(b ~ a, data = adat)
+abline(adat.lm)
