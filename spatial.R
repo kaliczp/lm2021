@@ -10,11 +10,15 @@ plot(surf.df, asp = TRUE)
 plot(surf.df$x,surf.df$y, asp = TRUE)
 
 ## Térbeli adatok a rácson
-surf.df$surf <- surf.df$x + surf.df$y
+surf.df$surf <- 4 * surf.df$x - surf.df$y + rnorm(nrow(surf.df), sd=0.05)
 
 ## Adat mátrix
 surf.mat <- matrix(surf.df$surf, nrow=11)
 
 ## Felület ábrázolása
-plot(surf.df, asp = TRUE)
+plot(surf.df[,1:2], asp = TRUE)
 contour(surf.mat, add = TRUE)
+
+surf.lm <- lm(surf ~ x + y -1 , surf.df)
+summary(surf.lm)
+plot(surf.lm)
