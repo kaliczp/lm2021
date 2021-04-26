@@ -19,6 +19,7 @@ surf.mat <- matrix(surf.df$surf, nrow=11)
 plot(surf.df[,1:2], asp = TRUE)
 contour(surf.mat, add = TRUE)
 
-surf.lm <- lm(surf ~ x + y -1 , surf.df)
+surf.lm <- lm(surf ~ x + y + I(x^2) + I(y^2) -1 , surf.df)
 summary(surf.lm)
 plot(surf.lm)
+
