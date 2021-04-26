@@ -23,3 +23,7 @@ surf.lm <- lm(surf ~ x + y + I(x^2) + I(y^2) -1 , surf.df)
 summary(surf.lm)
 plot(surf.lm)
 
+## nem paraméteres modell
+topo.loess <- loess(surf ~ x * y, surf.df,span=0.25, normalize=F)
+topo.lo <- predict(topo.loess)
+
