@@ -45,3 +45,36 @@ boxplot(log(meuse$zinc))
 qqnorm(log(meuse$zinc))
 qqline(log(meuse$zinc))
 hist(log(meuse$zinc))
+
+coordinates(meuse) <- ~x+y
+plot(meuse)
+
+hscat(log(zinc)~1, meuse, c(0, 80, 120, 250, 500, 1000))
+
+var.res <- variogram(log(zinc) ~x+y, meuse)
+plot(var.res)
+
+var.res <- variogram(log(zinc) ~x+y, meuse, alpha = c(0,45,90,135))
+plot(var.res)
+
+v <- variogram(log(zinc) ~x+y, meuse)
+## Variogram modellek
+show.vgms()
+
+v.fit <- fit.variogram(v, vgm(1, "Sph", 700, 1))
+plot(v,v.fit)
+
+data("meuse.grid")
+gridded(meuse.grid) <- ~x+y
+plot(meuse.grid)
+points(meuse.grid)
+
+m = vgm(.39, "Sph", 1100, 0.08)
+plot(v,m)
+m.k1 <- krige(log(zinc) ~1, meuse, meuse.grid, model = m)
+plot(m.k1)
+spplot(m.k1["var1.pred"])
+
+m.k2 <- krige(log(zinc)~1, meuse, meuse.grid, model=m, beta=5.9)
+m.k3 <- krige(log(zinc) ~x+y, meuse, meuse.grid, model = m)
+plot(m.k3)
