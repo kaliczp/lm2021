@@ -15,3 +15,12 @@ contour(trsurf, asp = TRUE)
 
 correlogram(topo.ls, 30)
 variogram(topo.ls, 30)
+
+library(sp)
+coordinates(topo) <- ~x+y
+class(topo)
+topo
+plot(topo)
+axis(1)
+axis(2)
+box()
